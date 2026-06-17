@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Shelfline Studio - Desk Tray Spec Case</title>
+    <style>
+      :root {
+        --bg: #f6f1ea;
+        --paper: #fffcf7;
+        --ink: #181816;
+        --muted: #6b655f;
+        --line: #d9cec3;
+        --clay: #b96649;
+        --moss: #405844;
+        --blue: #3f5e70;
+        --sage: #dde8dd;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+        letter-spacing: 0;
+      }
+
+      main {
+        width: 100%;
+        overflow: hidden;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 28px 22px 18px;
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 800;
+      }
+
+      .nav span:first-child {
+        color: var(--clay);
+      }
+
+      .nav .case-note {
+        margin: 0;
+        color: rgba(107, 101, 95, 0.62);
+        font-size: 13px;
+      }
+
+      .hero {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 34px 22px 72px;
+      }
+
+      .hero h1 {
+        max-width: 920px;
+        margin: 0 0 20px;
+        font-size: clamp(48px, 8vw, 104px);
+        line-height: 0.95;
+        font-weight: 900;
+      }
+
+      .hero p {
+        max-width: 760px;
+        margin: 0 0 34px;
+        color: var(--muted);
+        font-size: clamp(20px, 3vw, 34px);
+        line-height: 1.16;
+        font-weight: 700;
+      }
+
+      .case-note {
+        display: block;
+        margin-top: -16px;
+        margin-bottom: 32px;
+        color: rgba(107, 101, 95, 0.72);
+        font-size: 15px;
+        line-height: 1.4;
+        font-weight: 750;
+      }
+
+      .hero-media {
+        background: var(--paper);
+        border-radius: 8px;
+        box-shadow: 0 24px 60px rgba(36, 31, 26, 0.16);
+        overflow: hidden;
+      }
+
+      section {
+        padding: 78px 22px;
+      }
+
+      .band {
+        background: var(--paper);
+      }
+
+      .inner {
+        max-width: 1160px;
+        margin: 0 auto;
+      }
+
+      h2 {
+        margin: 0 0 22px;
+        font-size: clamp(34px, 5vw, 56px);
+        line-height: 1;
+        font-weight: 900;
+      }
+
+      h3 {
+        margin: 0 0 12px;
+        font-size: 24px;
+        line-height: 1.08;
+        font-weight: 900;
+      }
+
+      p {
+        color: var(--muted);
+        font-size: 20px;
+        line-height: 1.45;
+        font-weight: 600;
+      }
+
+      .split {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 46px;
+        align-items: start;
+      }
+
+      .tight-list {
+        margin: 28px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .tight-list li {
+        border-top: 1px solid var(--line);
+        padding: 18px 0;
+        color: var(--ink);
+        font-size: 20px;
+        line-height: 1.35;
+        font-weight: 750;
+      }
+
+      .overview {
+        border-radius: 8px;
+        box-shadow: 0 18px 48px rgba(36, 31, 26, 0.12);
+      }
+
+      .angle-grid,
+      .gallery-grid,
+      .test-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+
+      .supporting-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+
+      .angle,
+      .test {
+        border-top: 3px solid var(--clay);
+        padding-top: 20px;
+      }
+
+      .angle p,
+      .test p {
+        margin-bottom: 0;
+        font-size: 18px;
+      }
+
+      .gallery-item {
+        background: var(--paper);
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 18px 44px rgba(36, 31, 26, 0.12);
+      }
+
+      .supporting-item {
+        background: rgba(255, 252, 247, 0.68);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      .supporting-item img {
+        opacity: 0.88;
+      }
+
+      .gallery-caption {
+        padding: 20px;
+      }
+
+      .supporting-caption {
+        padding: 16px;
+      }
+
+      .gallery-caption p {
+        margin: 0;
+        font-size: 17px;
+      }
+
+      .supporting-caption p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.35;
+        font-weight: 650;
+      }
+
+      .deliverables {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px 36px;
+        margin-top: 28px;
+        padding: 0;
+        list-style: none;
+      }
+
+      .deliverables li {
+        border-top: 1px solid var(--line);
+        padding: 16px 0;
+        font-size: 21px;
+        font-weight: 800;
+      }
+
+      .cta {
+        background: var(--moss);
+        color: var(--paper);
+      }
+
+      .cta p {
+        color: rgba(255, 252, 247, 0.78);
+      }
+
+      .cta h2 {
+        max-width: 760px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 56px;
+        margin-top: 18px;
+        padding: 0 24px;
+        border-radius: 8px;
+        background: var(--paper);
+        color: var(--moss);
+        font-size: 18px;
+        font-weight: 900;
+        text-decoration: none;
+      }
+
+      .offer {
+        max-width: 680px;
+        margin: 26px 0 0;
+        padding: 20px 0 4px;
+        border-top: 1px solid rgba(255, 252, 247, 0.24);
+        color: var(--paper);
+      }
+
+      .offer strong {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 22px;
+        line-height: 1.2;
+        font-weight: 900;
+      }
+
+      .offer span {
+        display: block;
+        color: rgba(255, 252, 247, 0.78);
+        font-size: 18px;
+        line-height: 1.4;
+        font-weight: 700;
+      }
+
+      .email-line {
+        margin-top: 14px;
+        color: rgba(255, 252, 247, 0.84);
+        font-size: 17px;
+        line-height: 1.4;
+        font-weight: 750;
+      }
+
+      .note {
+        margin-top: 22px;
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.4;
+        font-weight: 700;
+      }
+
+      @media (max-width: 850px) {
+        .nav {
+          align-items: flex-start;
+          gap: 8px;
+          flex-direction: column;
+        }
+
+        .split,
+        .angle-grid,
+        .gallery-grid,
+        .supporting-grid,
+        .test-grid,
+        .deliverables {
+          grid-template-columns: 1fr;
+        }
+
+        section {
+          padding: 58px 20px;
+        }
+
+        .hero {
+          padding: 28px 20px 56px;
+        }
+
+        .hero h1 {
+          font-size: clamp(46px, 13vw, 72px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <nav class="nav" aria-label="Case navigation">
+        <span>Shelfline Studio</span>
+        <span>Product photo -> ad creative system</span>
+      </nav>
+
+      <header class="hero">
+        <h1>One product photo -> 6 testable ad creatives.</h1>
+        <p>
+          Shelfline Studio turns ordinary Shopify product images into clear,
+          test-ready ad creative systems.
+        </p>
+        <span class="case-note">Spec concept · No client · No campaign data</span>
+        <div class="hero-media">
+          <img src="assets/contact-sheets/portfolio-hero-cover.png" alt="One product photo to six testable ad creatives" />
+        </div>
+      </header>
+
+      <section class="band">
+        <div class="inner split">
+          <div>
+            <h2>Problem</h2>
+            <p>
+              Small Shopify brands often have product photos that work for a product page,
+              but not for paid social. The image is clean, yet it does not show a lifestyle
+              angle, visual hook, or reason to test the product as an ad.
+            </p>
+          </div>
+          <ul class="tight-list">
+            <li>Before: a plain white-background product photo.</li>
+            <li>Missing: customer context, use case, and ad variants.</li>
+            <li>Goal: make the product easier to understand and easier to test.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <div class="inner">
+          <h2>Creative Strategy</h2>
+          <p>
+            The strategy was not to invent a fake brand story. It was to take one usable
+            product image and build a small testing system around it: lifestyle context,
+            direct copy, utility callouts, and layout extensions for common ad placements.
+          </p>
+          <img class="overview" src="assets/contact-sheets/case-study-overview.png" alt="Case study overview showing before image and six ad creative directions" />
+        </div>
+      </section>
+
+      <section class="band">
+        <div class="inner">
+          <h2>3 Creative Angles</h2>
+          <div class="angle-grid">
+            <article class="angle">
+              <h3>Desk Reset</h3>
+              <p>Show the tray as one landing spot for the small things that keep spreading across a work surface.</p>
+            </article>
+            <article class="angle">
+              <h3>Product Explainer</h3>
+              <p>Use props and callouts so a cold viewer understands phone, keys, and cards in one glance.</p>
+            </article>
+            <article class="angle">
+              <h3>Giftable Upgrade</h3>
+              <p>Frame the product as a useful small desk gift or finishing touch for a new workspace setup.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="inner">
+          <h2>Core Before / After Examples</h2>
+          <div class="gallery-grid">
+            <article class="gallery-item">
+              <img src="assets/ads/01-desk-reset-hero-v2.png" alt="Lifestyle ad creative using desk tray with phone keys cards earbuds and notebook" />
+              <div class="gallery-caption">
+                <h3>Lifestyle Hook</h3>
+                <p>Turns the plain tray image into a desk scene with a clear customer use case.</p>
+              </div>
+            </article>
+            <article class="gallery-item">
+              <img src="assets/ads/02-before-after-split-v2.png" alt="Before and after split showing product photo becoming lifestyle ad concept" />
+              <div class="gallery-caption">
+                <h3>Before / After</h3>
+                <p>Shows the transformation from ordinary product asset to test-ready ad message.</p>
+              </div>
+            </article>
+            <article class="gallery-item">
+              <img src="assets/ads/03-utility-callouts-v2.png" alt="Utility callout ad showing phone keys and cards in a walnut desk tray" />
+              <div class="gallery-caption">
+                <h3>Utility Callouts</h3>
+                <p>Makes the product function visible with real usage objects and direct labels.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="band">
+        <div class="inner">
+          <h2>Supporting 04-06 Creatives</h2>
+          <p>
+            These remain in the case as supporting directions. The main proof is the hero cover,
+            overview, and the three core v2 examples above.
+          </p>
+          <div class="supporting-grid">
+            <article class="supporting-item">
+              <img src="assets/ads/04-giftable-editorial.png" alt="Supporting giftable editorial creative direction" />
+              <div class="supporting-caption">
+                <h3>04 Giftable Editorial</h3>
+                <p>Secondary gifting direction; useful as a layout extension, not the main proof.</p>
+              </div>
+            </article>
+            <article class="supporting-item">
+              <img src="assets/ads/05-routine-reset.png" alt="Supporting routine reset creative direction" />
+              <div class="supporting-caption">
+                <h3>05 Routine Reset</h3>
+                <p>Supporting habit angle; kept as a secondary creative variant.</p>
+              </div>
+            </article>
+            <article class="supporting-item">
+              <img src="assets/ads/06-visual-noise.png" alt="Supporting calm workspace creative direction" />
+              <div class="supporting-caption">
+                <h3>06 Visual Noise</h3>
+                <p>Supporting emotional angle; not used as the primary transformation proof.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="band">
+        <div class="inner split">
+          <div>
+            <h2>Deliverables</h2>
+            <p>
+              A small but usable ad creative system for a Shopify desk accessory brand.
+            </p>
+          </div>
+          <ul class="deliverables">
+            <li>6 ad creative directions</li>
+            <li>6 layout extensions</li>
+            <li>3 creative angles</li>
+            <li>Before/after hero cover</li>
+            <li>Case study positioning copy</li>
+            <li>Outreach-ready summary</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <div class="inner">
+          <h2>What A Shopify Brand Could Test Next</h2>
+          <div class="test-grid">
+            <article class="test">
+              <h3>Hook</h3>
+              <p>Desk clutter solution vs direct product utility.</p>
+            </article>
+            <article class="test">
+              <h3>Format</h3>
+              <p>Lifestyle scene vs product explainer vs before/after split.</p>
+            </article>
+            <article class="test">
+              <h3>Placement</h3>
+              <p>4:5 feed, 9:16 story, Pinterest pin, link ad, and retargeting display.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta">
+        <div class="inner">
+          <h2>Have product photos, but no strong ad angles?</h2>
+          <p>
+            Shelfline Studio turns ordinary Shopify product images into clear,
+            test-ready ad creative directions.
+          </p>
+          <p class="offer">
+            <strong>Pilot offer: 5-Day Product Ad Refresh Pack</strong>
+            <span>1 product photo · 3 creative angles · 6 static ad concepts · 1 revision</span>
+          </p>
+          <a class="button" href="mailto:shelflinestudio@gmail.com">Start with one product photo</a>
+          <p class="email-line">Email: shelflinestudio@gmail.com</p>
+          <p class="note">Spec concept · No client · No campaign data</p>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
